@@ -44,7 +44,7 @@ def main():
     )
     parser.add_argument(
         "--success-threshold",
-        default=os.getenv("SUCCESS_THRESHOLD", 0.8),
+        default=float(os.getenv("SUCCESS_THRESHOLD", 0.8)),
         help="The threshold of success confidence (0.0 ~ 1.0)",
         type=float,
     )
