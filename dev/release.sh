@@ -30,8 +30,8 @@ cd "${base_dir}"
 
 if [ "${RELEASE_CHECK_ORIGIN:-yes}" = "yes" ]; then
   git_origin_url="$(git remote get-url origin)"
-  if [ "${git_origin_url}" != "git@github.com:enactic/dora-openarm-docker-policy-server.git" ]; then
-    echo "This script must be ran with working copy of enactic/dora-openarm-docker-policy-server."
+  if [ "${git_origin_url}" != "git@github.com:enactic/dora-openarm-inference-controller.git" ]; then
+    echo "This script must be ran with working copy of enactic/dora-openarm-inference-controller."
     echo "The origin's URL: ${git_origin_url}"
     exit 1
   fi
@@ -54,6 +54,6 @@ fi
 
 if [ "${RELEASE_TAG:-yes}" = "yes" ]; then
   echo "Tag"
-  git tag -a -m "dora-openarm-docker-policy-server ${version}" "${version}"
+  git tag -a -m "dora-openarm-inference-controller ${version}" "${version}"
   git push origin "${version}"
 fi
