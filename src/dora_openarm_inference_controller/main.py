@@ -48,6 +48,12 @@ def main():
         help="The threshold of success confidence (0.0 ~ 1.0)",
         type=float,
     )
+    parser.add_argument(
+        "--ready-status",
+        default=os.getenv("READY_STATUS", "aligned"),
+        help="The arm status value to wait for before starting",
+        type=str,
+    )
     args = parser.parse_args()
     arms = args.arms.split(",")
 
@@ -73,7 +79,7 @@ def main():
             if is_ready():
                 continue
             side = event_id.removeprefix("arm_").removesuffix("_status")
-            if event["value"][0].as_py() == "aligned":
+            if event["value"][0].as_py() == args.ready_status:
                 ready_arms[side] = True
                 if is_ready():
                     start_time_ns = time.monotonic_ns()
