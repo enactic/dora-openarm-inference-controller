@@ -73,7 +73,7 @@ def main():
             if is_ready():
                 continue
             side = event_id.removeprefix("arm_").removesuffix("_status")
-            if event["value"][0].as_py() == "aligned":
+            if event["value"][0].as_py() in ("aligned", "ready"):
                 ready_arms[side] = True
                 if is_ready():
                     start_time_ns = time.monotonic_ns()
