@@ -84,10 +84,9 @@ def main():
             if not is_ready():
                 continue
             if event_id == "phase_classifier_result":
-                result = event["value"]
-                success = result.field("success")[0].as_py()
-                confidence = result.field("confidence")[0].as_py()
-                if success and confidence > args.success_threshold:
+                score = event["value"][0].as_py()
+                verdict = event["metadata"].get("verdict")
+                if verdict == "SUCCESS" and score > args.success_threshold:
                     node.send_output("command", pa.array(["success"]))
                     break
             elif event_id == "progress_tick":
